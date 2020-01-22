@@ -1,0 +1,38 @@
+{
+    
+    "interns":{"backEnd":[
+        {
+            "name": "Praveen",
+            "age": 22
+        },
+        {
+            "name": "Bhumil",
+            "age": 22
+        },
+        {
+            "name": "Vidit",
+            "age": 22
+        },
+        {
+            "name": "Rupak",
+            "age" : 22
+        },
+        {
+            "name": "Anand",
+            "age": 22
+        }
+        
+        ] , 
+
+        "frontEnd": [ {
+            "name" : "Swastik",
+            "age"  : 22
+            },
+            {
+            "name" : "Heemanshi",
+            "age"  : 22
+
+        }
+        ]
+    }
+} 
