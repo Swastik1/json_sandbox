@@ -1,50 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Json</title>
-</head>
-<body>
-    <ul id="interns"></ul>
+  </head>
+  <body>
+    <!-- <ul id="interns"></ul>
     <script>
-        // var interns = {
-        //     name: "Swastik",
-        //     age: 22,
-        //     email: function(){
-        //         return "swastik@gmail.com"
-        //     }
-            
-	
-        // }
-        // interns = JSON.stringify(interns)
-        // console.log(interns.name);
-        // interns = JSON.parse(interns);
-        // console.log(interns.name)
-        // console.log(interns.email());
+      // var interns = {
+      //     name: "Swastik",
+      //     age: 22,
+      //     email: function(){
+      //         return "swastik@gmail.com"
+      //     }
 
-        // console.log(interns.)
+      // }
+      // interns = JSON.stringify(interns)
+      // console.log(interns.name);
+      // interns = JSON.parse(interns);
+      // console.log(interns.name)
+      // console.log(interns.email());
 
+      // console.log(interns.)
 
-        var xhttp = new XMLHttpRequest();
-xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-       // Typical action to be performed when the document is ready:
-        //document.getElementById("demo").innerHTML = xhttp.responseText;
-        var response = JSON.parse(xhttp.responseText);
-        var interns = response.interns;
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          // Typical action to be performed when the document is ready:
+          //document.getElementById("demo").innerHTML = xhttp.responseText;
+          var response = JSON.parse(xhttp.responseText);
+          var interns = response.interns;
+          var frontEndInterns = interns.frontEnd;
+          var backEndInterns = interns.backEnd;
 
-        var output = '';
-        for(var i in interns) {
-            output += '<li>'+interns[i]+'</li>'
+          var output = "";
+          output += "<h2><strong>Manager</strong></h2>";
+          output += "<h3>" + response.manager + "</h3>";
+          output += "<h2>Tech Lead</h2>";
+          output += "<h3>" + response.techLead + "</h3";
+          output += "<h2>BackEnd Interns</h2>";
+          for (var i in backEndInterns) {
+            output +=
+              "<h4>" +
+              backEndInterns[i].name +
+              ", " +
+              backEndInterns[i].age +
+              "</h4";
+          }
+          output += "<h2>FrontEnd Interns</h2>";
+          for (var i in frontEndInterns) {
+            output +=
+              "<h4>" +
+              frontEndInterns[i].name +
+              ", " +
+              frontEndInterns[i].age +
+              "</h4>";
+          }
+          document.getElementById("interns").innerHTML = output;
         }
-        document.getElementById('interns').innerHTML = output;
-        
-    }
-};
-xhttp.open("GET", "interns.json", true); 
-xhttp.send();
+      };
+      xhttp.open("GET", "interns.json", true);
+      xhttp.send();
+    </script> -->
+
+    <ul id="interns"></ul>
+    <table id="backend" border="1" cellspacing="0" cellpadding="5">
+      <tr>
+        <th colspan="2">Backend</th>
+      </tr>
+      <tr>
+        <th>Name</th>
+        <th>Age</th>
+      </tr>
+    </table>
+
+    <br />
+    <table id="frontend" border="1" cellspacing="0" cellpadding="5">
+      <tr>
+        <th colspan="2">Frontend</th>
+      </tr>
+      <tr>
+        <th>Name</th>
+        <th>Age</th>
+      </tr>
+    </table>
+
+    <script>
+      // var interns = {
+      //     name: "Swastik",
+
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          // Typical action to be performed when the document is ready:
+          //document.getElementById("demo").innerHTML = xhttp.responseText;
+          var response = JSON.parse(xhttp.responseText);
+          var interns = response.interns;
+          xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+              // Typical action to be performed when the document is ready:
+              //document.getElementById("demo").innerHTML = xhttp.responseText;
+              const response = JSON.parse(xhttp.responseText);
+              const interns = response.interns;
+              var output = "";
+              output += "<h2><strong>Manager</strong></h2>";
+              output += "<h3>" + response.manager + "</h3>";
+              output += "<h2>Tech Lead</h2>";
+              output += "<h3>" + response.techLead + "</h3";
+              for (var i in interns.backEnd) {
+                document.getElementById(
+                  "backend"
+                ).innerHTML += `<tr><td>${interns.backEnd[i].name}</td><td>${interns.backEnd[i].age}</td></tr>`;
+              }
+
+              //var output = "";
+              for (var i in interns) {
+                output += "<li>" + interns[i] + "</li>";
+              }
+              document.getElementById("interns").innerHTML = output;
+            }
+          };
+          xhttp.open("GET", "interns.json", true);
+          xhttp.send();
+          for (var i in interns.frontEnd) {
+            document.getElementById(
+              "frontend"
+            ).innerHTML += `<tr><td>${interns.frontEnd[i].name}</td><td>${interns.frontEnd[i].age}</td></tr>`;
+          }
+        }
+      };
+      xhttp.open("GET", "interns.json", true);
+      xhttp.send();
     </script>
-</body>
+  </body>
 </html>
